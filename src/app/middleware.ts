@@ -21,6 +21,15 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/login', request.url));
     }
 
+    // if (!isAuthenticated && request.nextUrl.pathname === '/') {
+    //     // Redirect to the login page
+    //     return NextResponse.redirect(new URL('/login', request.url));
+    // }
+
+    // if (isAuthenticated && request.nextUrl.pathname === '/') {
+    //     // Redirect to the login page
+    //     return NextResponse.redirect(new URL('/home', request.url));
+    // }
 
     // If authenticated or not accessing /home, allow the request
     return NextResponse.next();
@@ -28,5 +37,5 @@ export function middleware(request: NextRequest) {
 
 // Set the middleware to apply to the /home path
 export const config = {
-    matcher: ['/home'],
+    matcher: ['/home', '/', '/login'],
 };

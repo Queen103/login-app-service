@@ -13,7 +13,7 @@ export default function LoginPage() {
     const [isExiting, setIsExiting] = useState(false); // Trạng thái thoát
     const router = useRouter();
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         if (username === '') {
@@ -35,17 +35,19 @@ export default function LoginPage() {
         } else {
             alert('Login successful');
             document.cookie = "isAuthenticated=true; path=/; max-age=3600"; // Cookie có hiệu lực 1 giờ
-
-            router.push('/home'); // Chuyển hướng đến trang /home
+            setIsExiting(true);
+            setTimeout(() => {
+                router.push('/home'); // Redirect to forgot-password page
+            }, 6000); // Chuyển hướng đến trang /home
         }
     };
 
-    const handleForgotPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault(); // Prevent the form from submitting
+    const handleForgotPassword = (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
         setIsExiting(true); // Start exit animation
         setTimeout(() => {
             router.push('/forgot-password'); // Redirect to forgot-password page
-        }, 300); // Time to complete the exit animation
+        }, 6000); // Time to complete the exit animation
     };
 
     return (
@@ -54,9 +56,11 @@ export default function LoginPage() {
             <motion.form
                 onSubmit={handleSubmit}
                 className="relative z-50 w-full max-w-md p-8 bg-white rounded-lg shadow-lg"
-                initial={{ opacity: 0, y: 50 }} // Vị trí ban đầu của form
-                animate={{ opacity: isExiting ? 0 : 1, y: isExiting ? -50 : 0 }} // Vị trí và độ mờ khi form xuất hiện hoặc thoát
-                transition={{ duration: 0.5 }} // Thời gian cho hiệu ứng
+                initial={{ opacity: 1, y: -800 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
+                animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? -800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
+                exit={{ opacity: 1, y: -800 }} // Trượt xuống dưới khi biến mất
+                transition={{ duration: 6.0, ease: 'easeInOut' }} // Hoặc sử dụng các easing functions khác
+
             >
                 <img
                     src="https://vnatech.com.vn/wp-content/uploads/2022/01/Logo.png"

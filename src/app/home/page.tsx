@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 export default function HomePage() {
+    const [isExiting, setIsExiting] = useState(false); // Trạng thái thoát
     const router = useRouter();
     const [userInfo, setUserInfo] = useState<{ email: string; name: string; phone: string } | null>(null);
 
@@ -28,7 +29,10 @@ export default function HomePage() {
     const handleLogout = () => {
         document.cookie = "isAuthenticated=false; path=/; max-age=0"; // Xóa cookie
         alert('You have logged out.');
-        router.push('/'); // Chuyển hướng về trang đăng nhập
+        setIsExiting(true); // Đặt trạng thái thoát trước khi chuyển hướng
+        setTimeout(() => {
+            router.push('/login'); // Chuyển hướng sau khi thoát
+        }, 5000);// Chuyển hướng về trang đăng nhập
     };
 
     if (!userInfo) {
@@ -37,12 +41,20 @@ export default function HomePage() {
 
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-orange-500">
-            <h1 className="text-4xl font-bold text-white mb-4">Welcome, {userInfo.name}!</h1>
+            <motion.div
+                initial={{ opacity: 1, y: -900 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
+                animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? -800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
+                exit={{ opacity: 1, y: -800 }} // Trượt xuống dưới khi biến mất
+                transition={{ duration: 5 }}>
+                <h1 className="text-4xl font-bold text-white mb-4">Welcome, {userInfo.name}!</h1>
+            </motion.div>
+
             <motion.div
                 className="bg-white rounded-lg p-6 shadow-lg w-full max-w-md"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 1, y: 900 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
+                animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? 800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
+                exit={{ opacity: 1, y: 800 }} // Trượt xuống dưới khi biến mất
+                transition={{ duration: 5 }}
             >
                 <p className="text-lg mb-2 text-black"><strong>Email:</strong> {userInfo.email}</p>
                 <p className="text-lg mb-2 text-black"><strong>Name:</strong> {userInfo.name}</p>

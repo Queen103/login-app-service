@@ -33,10 +33,10 @@ export default function ForgotPasswordPage() {
 
         if (registeredEmails.includes(email)) {
             alert('Reset password code has been sent to your email.');
-            setIsExiting(true);
+            setIsExiting(true); // Bắt đầu hiệu ứng thoát
             setTimeout(() => {
-                router.push('/');
-            }, 300);
+                router.push('/login'); // Chuyển hướng sau khi thoát
+            }, 6000); // Thời gian trễ tương ứng với thời gian hiệu ứng
         } else {
             alert('Email does not exist.');
         }
@@ -48,9 +48,10 @@ export default function ForgotPasswordPage() {
             <motion.form
                 onSubmit={handleSubmit}
                 className="relative z-50 w-full max-w-md p-8 bg-white rounded-lg shadow-lg"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: isExiting ? 0 : 1, y: isExiting ? -50 : 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 1, y: 700 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
+                animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? 700 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
+                exit={{ opacity: 1, y: 700 }} // Trượt xuống dưới khi biến mất
+                transition={{ duration: 6.0, ease: 'easeInOut' }}
             >
                 <img
                     src="https://vnatech.com.vn/wp-content/uploads/2022/01/Logo.png"
@@ -64,7 +65,7 @@ export default function ForgotPasswordPage() {
                     style={{ padding: '0.5rem 1rem' }}
                     whileHover={{ scale: 1.05 }}
                 >
-                    <FaEnvelope className="text-orange-500 mr-3 w-5 h-5  text-10xl" /> {/* Adjusted size and margin */}
+                    <FaEnvelope className="text-orange-500 mr-3 w-5 h-5 text-10xl" />
                     <input
                         type="email"
                         id="email"
@@ -97,12 +98,19 @@ export default function ForgotPasswordPage() {
 
                 <div className="flex justify-center">
                     <button
-                        onClick={() => router.push('/')}
+                        type='button'
+                        onClick={() => {
+                            setIsExiting(true); // Đặt trạng thái thoát trước khi chuyển hướng
+                            setTimeout(() => {
+                                router.push('/login'); // Chuyển hướng sau khi thoát
+                            }, 6000); // Thời gian trễ tương ứng với thời gian hiệu ứng
+                        }}
                         className="text-orange-500 underline"
                     >
                         Back to Login
                     </button>
                 </div>
+
             </motion.form>
         </div>
     );
