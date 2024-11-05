@@ -13,10 +13,7 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "Login VNA Tech",
-  description: "Login Web from user's VNATech",
-};
+
 
 export default function RootLayout({
   children,

@@ -1,3 +1,4 @@
+import { GiOrangeSlice } from "react-icons/gi";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
