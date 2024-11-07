@@ -59,7 +59,7 @@ export default function LoginPage() {
                 initial={{ opacity: 1, y: -800 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
                 animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? -800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
                 exit={{ opacity: 1, y: -800 }} // Trượt xuống dưới khi biến mất
-                transition={{ duration: 6.0, ease: 'easeInOut' }} // Hoặc sử dụng các easing functions khác
+                transition={{ duration: 6.0, ease: 'linear' }} // Hoặc sử dụng các easing functions khác
 
             >
                 <img

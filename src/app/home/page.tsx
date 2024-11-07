@@ -42,19 +42,19 @@ export default function HomePage() {
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-orange-500">
             <motion.div
-                initial={{ opacity: 1, y: -900 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
-                animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? -800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
-                exit={{ opacity: 1, y: -800 }} // Trượt xuống dưới khi biến mất
-                transition={{ duration: 5 }}>
+                initial={{ opacity: 1, y: -550 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
+                animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? -550 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
+                exit={{ opacity: 1, y: -550 }} // Trượt xuống dưới khi biến mất
+                transition={{ duration: 6.0, ease: 'linear' }}>
                 <h1 className="text-4xl font-bold text-white mb-4">Welcome, {userInfo.name}!</h1>
             </motion.div>
 
             <motion.div
                 className="bg-white rounded-lg p-6 shadow-lg w-full max-w-md"
-                initial={{ opacity: 1, y: 900 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
+                initial={{ opacity: 1, y: 800 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
                 animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? 800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
                 exit={{ opacity: 1, y: 800 }} // Trượt xuống dưới khi biến mất
-                transition={{ duration: 5 }}
+                transition={{ duration: 6.0, ease: 'linear' }}
             >
                 <p className="text-lg mb-2 text-black"><strong>Email:</strong> {userInfo.email}</p>
                 <p className="text-lg mb-2 text-black"><strong>Name:</strong> {userInfo.name}</p>
