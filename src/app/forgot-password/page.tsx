@@ -44,29 +44,30 @@ export default function ForgotPasswordPage() {
 
     return (
         <div className="outer-container"> {/* Thêm thẻ div ngoài cùng */}
-            <div className="relative flex justify-center items-center h-screen bg-orange-500 overflow-hidden"> {/* Ngăn cuộn trang */}
+            <div className="relative flex justify-center items-center h-screen bg-orange-400 overflow-hidden"> {/* Ngăn cuộn trang */}
                 <div className="absolute inset-0 bg-opacity-50"></div>
                 <motion.form
-                    onSubmit={handleSubmit}
-                    className="relative z-50 w-full max-w-md p-8 bg-white rounded-lg shadow-lg"
-                    initial={{ opacity: 1, y: 800 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
-                    animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? 800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
-                    exit={{ opacity: 1, y: 800 }} // Trượt xuống dưới khi biến mất
-                    transition={{ duration: 6.0, ease: 'linear' }}
-                >
+                onSubmit={handleSubmit}
+                className="relative z-50 w-full max-w-md p-8 bg-white rounded-[50px] shadow-lg"
+                initial={{ opacity: 1, y: 800 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
+                animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? -800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
+                exit={{ opacity: 1, y: -800 }} // Trượt xuống dưới khi biến mất
+                transition={{ duration: 6.0, ease: 'linear' }}
+
+            >
                     <img
                         src="https://vnatech.com.vn/wp-content/uploads/2022/01/Logo.png"
                         alt="Logo"
                         className="mb-6 mx-auto h-20"
                     />
-                    <h2 className="text-3xl font-bold text-orange-500 text-center mb-10 mt-4">RESET PASSWORD</h2>
+                    <h2 className="text-3xl font-bold text-orange-400 text-center mb-10 mt-4">RESET PASSWORD</h2>
 
                     <motion.div
                         className={`mb-6 flex items-center border ${emailError ? 'border-red' : 'border-gray-300'} rounded-full overflow-hidden transition-all duration-300`}
                         style={{ padding: '0.5rem 1rem' }}
                         whileHover={{ scale: 1.05 }}
                     >
-                        <FaEnvelope className="text-orange-500 mr-3 w-5 h-5 text-10xl" />
+                        <FaEnvelope className="w-6 h-6 text-orange-400 ml-2" />
                         <input
                             type="email"
                             id="email"
@@ -74,7 +75,7 @@ export default function ForgotPasswordPage() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             placeholder="Enter your email"
-                            className="w-full px-4 py-3 border-0 focus:outline-none text-black transition-transform duration-300"
+                            className="w-full px-4 py-3 border-0 focus:outline-none text-black rounded-[50px] transition-transform duration-300"
                             onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('This field is required')}
                             onInput={(e) => {
                                 (e.target as HTMLInputElement).setCustomValidity('');
@@ -87,7 +88,7 @@ export default function ForgotPasswordPage() {
                     <div className="flex justify-center">
                         <button
                             type="submit"
-                            className={`w-2/3 py-3 text-white font-bold rounded-full mb-10 transition-colors duration-200 ${isHovered ? 'bg-orange-400' : 'bg-orange-500'} ${isActive ? 'scale-95' : 'scale-100'}`}
+                            className={`w-2/3 py-3 text-white font-bold rounded-[50px] mb-10 transition-colors duration-200 ${isHovered ? 'bg-orange-400' : 'bg-orange-400'} ${isActive ? 'scale-95' : 'scale-100'}`}
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
                             onMouseDown={() => setIsActive(true)}
@@ -106,7 +107,7 @@ export default function ForgotPasswordPage() {
                                     router.push('/login'); // Chuyển hướng sau khi thoát
                                 }, 6000); // Thời gian trễ tương ứng với thời gian hiệu ứng
                             }}
-                            className="text-orange-500 underline"
+                            className="text-orange-400 underline"
                         >
                             Back to Login
                         </button>

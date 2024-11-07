@@ -51,73 +51,75 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="relative flex justify-center items-center h-screen bg-orange-500">
-            <div className="absolute inset-0 bg-opacity-50"></div>
-            <motion.form
-                onSubmit={handleSubmit}
-                className="relative z-50 w-full max-w-md p-8 bg-white rounded-lg shadow-lg"
-                initial={{ opacity: 1, y: -800 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
-                animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? -800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
-                exit={{ opacity: 1, y: -800 }} // Trượt xuống dưới khi biến mất
-                transition={{ duration: 6.0, ease: 'linear' }} // Hoặc sử dụng các easing functions khác
+        <div className="outer-container"> {/* Thêm thẻ div ngoài cùng */}
+            <div className="relative flex justify-center items-center h-screen bg-orange-400 overflow-hidden">
+                <div className="absolute inset-0 bg-opacity-50"></div>
+                <motion.form
+                    onSubmit={handleSubmit}
+                    className="relative z-50 w-full max-w-md p-8 bg-white rounded-[50px] shadow-lg"
+                    initial={{ opacity: 1, y: 800 }} // Vị trí ban đầu của form nằm trên đỉnh màn hình
+                    animate={{ opacity: isExiting ? 1 : 1, y: isExiting ? -800 : 0 }} // Trượt xuống khi xuất hiện và trượt tiếp xuống khi thoát
+                    exit={{ opacity: 1, y: -800 }} // Trượt xuống dưới khi biến mất
+                    transition={{ duration: 6.0, ease: 'linear' }}
 
-            >
-                <img
-                    src="https://vnatech.com.vn/wp-content/uploads/2022/01/Logo.png"
-                    alt="Logo"
-                    className="mb-6 mx-auto h-20"
-                />
-                <h2 className="text-4xl font-bold text-orange-500 text-center mb-10 mt-4">Welcome!</h2>
-
-                {/* Các trường nhập và nút bấm */}
-                <div className="mb-6 flex items-center border border-gray-300 rounded-full overflow-hidden transition-transform hover:scale-105">
-                    <FaUser className="w-6 h-6 text-orange-500 mx-2" /> {/* Biểu tượng màu cam */}
-                    <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                        placeholder="Enter username"
-                        className="w-full px-4 py-3 border-0 focus:outline-none text-black"
+                >
+                    <img
+                        src="https://vnatech.com.vn/wp-content/uploads/2022/01/Logo.png"
+                        alt="Logo"
+                        className="mb-6 mx-auto h-20"
                     />
-                </div>
+                    <h2 className="text-4xl font-bold text-orange-400 text-center mb-10 mt-4">Welcome!</h2>
 
-                <div className="mb-6 flex items-center border border-gray-300 rounded-full overflow-hidden transition-transform hover:scale-105">
-                    <FaLock className="w-6 h-6 text-orange-500 mx-2" /> {/* Biểu tượng màu cam */}
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        placeholder="Enter password"
-                        className="w-full px-4 py-3 border-0 focus:outline-none text-black"
-                    />
-                </div>
+                    {/* Các trường nhập và nút bấm */}
+                    <div className="mb-6 flex items-center border border-gray-400 rounded-[50px] overflow-hidden transition-transform hover:scale-105">
+                        <FaUser className="w-6 h-6 text-orange-400 ml-4" /> {/* Biểu tượng màu cam */}
+                        <input
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            placeholder="Enter username"
+                            className="w-full px-4 py-3 border-0 focus:outline-none text-black"
+                        />
+                    </div>
 
-                <div className="flex justify-end mt-8 mb-8 text-sm text-orange-500">
-                    <button
-                        onClick={handleForgotPassword}
-                        className="hover:underline"
-                    >
-                        Forgot password?
-                    </button>
-                </div>
+                    <div className="mb-6 flex items-center border border-gray-400 rounded-[50px] overflow-hidden transition-transform hover:scale-105">
+                        <FaLock className="w-6 h-6 text-orange-400 ml-4" /> {/* Biểu tượng màu cam */}
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            placeholder="Enter password"
+                            className="w-full px-4 py-3 border-0 focus:outline-none text-black"
+                        />
+                    </div>
 
-                <div className="flex justify-center">
-                    <button
-                        type="submit"
-                        className={`w-2/3 py-3 text-white font-bold rounded-full mb-10 transition-transform ${isHovered ? 'bg-orange-400' : 'bg-orange-500'} ${isActive ? 'scale-95' : 'scale-100'}`}
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                        onMouseDown={() => setIsActive(true)}
-                        onMouseUp={() => setIsActive(false)}
-                    >
-                        Login
-                    </button>
-                </div>
-            </motion.form>
+                    <div className="flex justify-end mt-8 mb-8 text-sm text-orange-400">
+                        <button
+                            onClick={handleForgotPassword}
+                            className="hover:underline"
+                        >
+                            Forgot password?
+                        </button>
+                    </div>
+
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            className={`w-2/3 py-3 text-white font-bold rounded-[50px] mb-10 transition-transform ${isHovered ? 'bg-orange-400' : 'bg-orange-400'} ${isActive ? 'scale-95' : 'scale-100'}`}
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                            onMouseDown={() => setIsActive(true)}
+                            onMouseUp={() => setIsActive(false)}
+                        >
+                            Login
+                        </button>
+                    </div>
+                </motion.form>
+            </div>
         </div>
     );
 }
